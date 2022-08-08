@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+   <div style="margin-top:70px;" class="jumbotron text-center">
+    <h3>welcome to the Block</h3>
+    <p>in this block i want to infor new technology.</p>
+</div>
+    <p>
+    {% if request.user.is_authenticated %}
+        giris yapildi {{ request.user.username }}
+    {% else %}
+     giris yapilmadi{{ request.user.username }}
+    {% endif %}
+    </p>
+{% endblock %}

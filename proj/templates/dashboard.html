@@ -1,0 +1,96 @@
+{#{% extends "layout.html" %}#}
+{##}
+{# {%  block body %}#}
+{# <br><br>#}
+{#    <h2>#}
+{#    kontrol panal#}
+{#    </h2>#}
+{#    <hr>#}
+{#    <p>#}
+{#    Welcome to the website of <small>{{ request.user.username }}</small>#}
+{#    <hr>#}
+{#    </p>#}
+{#    <a class="text-success" href="addarticle"> add New Article</a>#}
+{#    <hr>#}
+{#    { % if articles %}#}
+{#        <table class="table">#}
+{#      <thead>#}
+{#    <tr>#}
+{#      <th scope="col">id</th>#}
+{#      <th scope="col">baslik</th>#}
+{#      <th scope="col">yazar</th>#}
+{#      <th scope="col">tarih</th>#}
+{#         <th scope="col">guncel</th>#}
+{#         <th scope="col">sil</th>#}
+{#    </tr>#}
+{#  </thead>#}
+{#  <tbody>#}
+{#   {% for article in articles %}#}
+{#    <tr>#}
+{#      <th scope="row">{{ article.id }}</th>#}
+{#      <td>{{ article.title }}</td>#}
+{#      <td>{{ article.author.username }}</td>#}
+{#      <td>{{ article.created_date }}</td>#}
+{#      <td><a href="articles/updata/{{ article.id }}" class="btn btn-danger">guncel</a> </td>#}
+{#        <td><a href="articles/delete/{{ article.id }}" class="btn btn-danger">sil</a></td>#}
+{#    </tr>#}
+{#  {% endfor %}#}
+{#  </tbody>#}
+{#</table>#}
+{##}
+{#  {% else %}#}
+{#        <div class="alert alert-danger">#}
+{#            henuz makkalenin bulunmuyor......#}
+{#        </div>#}
+{#    {% endif %}#}
+{#{% endblock body %}#}
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>Kontrol Paneli</h3>
+<hr>
+<p>
+    Hoşgeldiniz, <small>{{request.user.username}}</small>
+</p>
+<hr>
+<a class = "btn btn-danger" href = "{% url 'addarticle' %}">Makale Ekle </a>
+<hr>
+{% if articles %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Başlık</th>
+            <th scope="col">Yazar</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Güncelle</th>
+            <th scope="col">Sil</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+          <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="articles/article/{{ article.id }}" >{{article.title}}</a></td>
+            <td>{{article.author.username}}</td>
+            <td>{{article.created_date}}</td>
+              <td><a href="articles/updata/{{ article.id }}" class="btn btn-danger">guncel</a> </td>
+            <td><a href="articles/delete/{{ article.id }}" class="btn btn-danger">sil</a></td>
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+{% else %}
+
+<div class = "alert alert-danger">
+    Henüz bir makaleniz bulunmuyor...
+
+</div>
+{% endif %}
+
+
+
+{% endblock body %}
+
